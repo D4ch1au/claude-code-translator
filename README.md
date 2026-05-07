@@ -1,16 +1,17 @@
 # Claude Code 翻译插件
 
-[English](./README_en.md) | [加入讨论](https://github.com/D4ch1au/claude-code-translator/issues)
+[English](./README_en.md)
 
 > Fork 说明：本仓库 fork 自 [iChenwin/claude-code-translator](https://github.com/iChenwin/claude-code-translator)。
 
-**通过将提示词自动翻译为英文，节省 30%~50% 的 Token 消耗。**
+**目标：在提示词进入 Claude Code 之前将非英文输入翻译为英文，尽可能降低语言或方言特征触发模型隐性偏见的风险。**
 
-这是一个非侵入式的 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 插件。它会在后台通过 TTime 云端翻译或 MiniMax Coding Plan 将你的中文/日文等输入自动翻译成英文。
+这是一个非侵入式的 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 插件。它会在后台通过 TTime 云端翻译或 MiniMax Coding Plan 将你的中文/日文等输入自动翻译成英文。设计动机来自 Stanford HAI 对语言模型隐性偏见问题的报道：模型可能仅根据表达方式或方言差异产生不同判断。本插件通过在 Hook 阶段先做语言规范化翻译，尽可能削弱这类语言特征对后续模型响应的影响。
 
 ## 主要特性
 
-- **无感介入**：自动检测非英文输入并翻译，保留代码块、URL 和文件路径原样。
+- **偏见缓解导向**：自动检测非英文输入并翻译，降低语言或方言线索对模型响应的影响。
+- **无感介入**：保留代码块、URL 和文件路径原样，避免破坏技术上下文。
 - **高兼容性**：支持 VS Code 集成模式、REPL 和文件读写操作。
 - **多引擎支持**：内置 **TTime 云端翻译** 和 **MiniMax Coding Plan** 支持。
 - **交互可控**：支持在发送前预览并修改翻译后的英文 Prompt，以及在接收回复后弹窗显示中文翻译结果（支持一键复制）。
@@ -98,6 +99,7 @@
 
 ## 依据
 
+- Stanford HAI 对语言模型隐性偏见机制的研究报道：`https://hai.stanford.edu/news/covert-racism-ai-how-language-models-are-reinforcing-outdated-stereotypes`。
 - MiniMax Coding Plan 配置参考 MiniMax 官方文档：`https://platform.minimax.io/docs/token-plan/other-tools`。
 - MiniMax Coding Plan 默认模型参考 `https://models.dev/api.json` 中的 `minimax-coding-plan` 记录。
 

@@ -4,13 +4,13 @@
 
 > Fork notice: This repository is forked from [iChenwin/claude-code-translator](https://github.com/iChenwin/claude-code-translator).
 
-**Save 30%~50% on token costs by automatically translating prompts to English.**
+**Goal: translate non-English prompts into English before they reach Claude Code to reduce the risk that language or dialect cues trigger covert bias in model responses.**
 
-This plugin hooks into [Claude Code](https://docs.anthropic.com/en/docs/claude-code) to translate non-English input (Chinese, Japanese, etc.) into English through TTime Cloud or MiniMax Coding Plan before it reaches Claude.
+This plugin hooks into [Claude Code](https://docs.anthropic.com/en/docs/claude-code) to translate non-English input (Chinese, Japanese, etc.) into English through TTime Cloud or MiniMax Coding Plan before it reaches Claude. The motivation comes from Stanford HAI's reporting on covert bias in language models: model behavior can vary based on language style or dialect cues. This plugin normalizes prompts through translation at the hook layer to reduce that influence as much as possible.
 
 ## Features
 
-- **Seamless**: Automatically detects and translates non-English input.
+- **Bias-mitigation oriented**: Automatically detects and translates non-English input to reduce language or dialect cue effects on model responses.
 - **Smart**: Preserves code blocks, file paths, and URLs.
 - **Flexible**: Supports **TTime Cloud** and **MiniMax Coding Plan** translation providers.
 - **Native Experience**: Supports review/edit dialogs before sending translated prompts and popup display for translated output.
@@ -100,6 +100,7 @@ Restart Claude Code, and you're good to go.
 
 ## References
 
+- Stanford HAI reporting on covert bias mechanisms in language models: `https://hai.stanford.edu/news/covert-racism-ai-how-language-models-are-reinforcing-outdated-stereotypes`.
 - MiniMax Coding Plan configuration is based on MiniMax official docs: `https://platform.minimax.io/docs/token-plan/other-tools`.
 - The default MiniMax Coding Plan model is based on the `minimax-coding-plan` record in `https://models.dev/api.json`.
 
