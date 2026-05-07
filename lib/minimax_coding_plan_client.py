@@ -128,7 +128,7 @@ class MiniMaxCodingPlanClient:
         return "".join(parts).strip()
 
     def _system_prompt(self, target_lang: str) -> str:
-        return f"""You are a professional translator. Translate the following text to {target_lang}.
+        return f"""You are a professional translator, All your translations must be professional and colloquial. Translate the following text to {target_lang}.
 Rules:
 1. Only output the translated text, no explanations
 2. Preserve code blocks, file paths, and technical terms as-is
