@@ -1,15 +1,39 @@
 {
-  "provider": "qianwen",
-  "qianwen": {
-    "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
-    "model": "qwen-plus",
-    "api_key": "your-qianwen-api-key"
-  },
-  "baidu": {
-    "api_key": "your-baidu-api-key",
-    "app_id": "your-baidu-app-id"
-  },
+  "provider": "ttime",
   "translate_output": true,
   "interactive_input": true,
-  "interactive_output": true
+  "interactive_output": true,
+  "ttime": {
+    "base_url": "https://ink.timerecord.cn/apis",
+    "source": "TTime",
+    "token": "your-ttime-callback-token",
+    "language_type": "auto",
+    "timeout": 30
+  },
+  "ttime_ai": {
+    "source": "TTimeAI"
+  },
+  "ttime_google": {
+    "source": "GoogleBuiltIn"
+  },
+  "ttime_deepl": {
+    "source": "DeepLBuiltIn"
+  },
+  "ttime_bing": {
+    "source": "Bing"
+  },
+  "ttime_transmart": {
+    "source": "TranSmart"
+  },
+  "ttime_niutrans": {
+    "source": "NiuTransBuiltIn"
+  },
+  "minimax_coding_plan": {
+    "base_url": "https://api.minimax.io/anthropic",
+    "model": "MiniMax-M2.7",
+    "api_key": "your-minimax-api-key",
+    "temperature": 0.3,
+    "max_tokens": 4096,
+    "timeout": 30
+  }
 }

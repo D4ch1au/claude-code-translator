@@ -5,40 +5,23 @@ import sys
 import json
 import os
 import io
+import tempfile
 
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from lib.qianwen_client import QianwenClient
-from lib.baidu_client import BaiduClient
+from lib.translation_client_factory import get_translation_client
 from lib.dialogs import show_confirm_dialog, show_translation_result
 
 
-def get_translation_client(config):
-    """Get the appropriate translation client based on config.
-
-    Args:
-        config: Configuration dictionary
-
-    Returns:
-        Translation client instance
-    """
-    provider = config.get('provider', 'qianwen')
-
-    if provider == 'baidu':
-        baidu_config = config['baidu']
-        return BaiduClient(
-            api_key=baidu_config['api_key'],
-            app_id=baidu_config['app_id']
-        )
-    else:
-        # Default to qianwen
-        qianwen_config = config['qianwen']
-        return QianwenClient(
-            base_url=qianwen_config['base_url'],
-            api_key=qianwen_config['api_key'],
-            model=qianwen_config['model']
-        )
+def write_debug_log(filename, content):
+    try:
+        log_dir = os.path.join(tempfile.gettempdir(), 'claude-code-translator')
+        os.makedirs(log_dir, exist_ok=True)
+        with open(os.path.join(log_dir, filename), 'a', encoding='utf-8') as f:
+            f.write(content)
+    except Exception:
+        pass
 
 
 def load_config():
@@ -67,9 +50,10 @@ def main():
             raw_input = raw_input[1:]
         input_data = json.loads(raw_input)
 
-        # Debug logging
-        with open('d:/code/src/claude-translator/debug_output_hook.log', 'a', encoding='utf-8') as f:
-            f.write(json.dumps(input_data, ensure_ascii=False, indent=2) + "\n\n")
+        write_debug_log(
+            'debug_output_hook.log',
+            json.dumps(input_data, ensure_ascii=False, indent=2) + "\n\n"
+        )
 
         # Check if this is an assistant message notification
         # Check if this is an idle prompt notification (meaning Claude finished responding)
@@ -105,9 +89,7 @@ def main():
                     except json.JSONDecodeError:
                         continue
         except Exception as e:
-            # Log error reading transcript
-            with open('d:/code/src/claude-translator/debug_output_error.log', 'a', encoding='utf-8') as f:
-                f.write(f"Error reading transcript: {e}\n")
+            write_debug_log('debug_output_error.log', f"Error reading transcript: {e}\n")
             print(json.dumps({"result": "continue"}))
             return
 
@@ -146,17 +128,20 @@ def main():
                 print(json.dumps({"result": "continue"}))
                 return
 
-        # Debug logging before translation
-        with open('d:/code/src/claude-translator/debug_output_hook.log', 'a', encoding='utf-8') as f:
-            f.write(f"Translating message (len={len(last_assistant_message)}):\n{last_assistant_message}\n\n")
+        write_debug_log(
+            'debug_output_hook.log',
+            f"Translating message (len={len(last_assistant_message)}):\n"
+            f"{last_assistant_message}\n\n"
+        )
 
         # Translate to Chinese
         translated, usage = client.translate(last_assistant_message, 'Chinese')
 
-        # Debug logging after translation
-        with open('d:/code/src/claude-translator/debug_output_hook.log', 'a', encoding='utf-8') as f:
-            f.write(f"Translation result (len={len(translated)}):\n{translated}\n")
-            f.write(f"Usage: {usage}\n\n")
+        write_debug_log(
+            'debug_output_hook.log',
+            f"Translation result (len={len(translated)}):\n{translated}\n"
+            f"Usage: {usage}\n\n"
+        )
 
         # Show result in a standalone window
         show_translation_result(last_assistant_message, translated, usage)
@@ -165,9 +150,7 @@ def main():
         print(json.dumps({"result": "continue"}))
 
     except Exception as e:
-        # On error, log to stderr and continue normally
-        with open('d:/code/src/claude-translator/debug_output_error.log', 'a', encoding='utf-8') as f:
-            f.write(f"Error: {e}\n")
+        write_debug_log('debug_output_error.log', f"Error: {e}\n")
         print(f"Output translation hook error: {e}", file=sys.stderr)
         print(json.dumps({"result": "continue"}))
 

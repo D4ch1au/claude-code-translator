@@ -8,36 +8,32 @@ import os
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from lib.qianwen_client import QianwenClient
-from lib.baidu_client import BaiduClient
+from lib.translation_client_factory import get_translation_client
 from lib.dialogs import show_edit_dialog
 
 
-def get_translation_client(config):
-    """Get the appropriate translation client based on config.
+def emit_continue():
+    """Continue without adding hook output."""
+    return
 
-    Args:
-        config: Configuration dictionary
 
-    Returns:
-        Translation client instance
-    """
-    provider = config.get('provider', 'qianwen')
+def emit_additional_context(context):
+    """Emit Codex-compatible UserPromptSubmit context."""
+    print(json.dumps({
+        "continue": True,
+        "hookSpecificOutput": {
+            "hookEventName": "UserPromptSubmit",
+            "additionalContext": context,
+        },
+    }, ensure_ascii=False))
 
-    if provider == 'baidu':
-        baidu_config = config['baidu']
-        return BaiduClient(
-            api_key=baidu_config['api_key'],
-            app_id=baidu_config['app_id']
-        )
-    else:
-        # Default to qianwen
-        qianwen_config = config['qianwen']
-        return QianwenClient(
-            base_url=qianwen_config['base_url'],
-            api_key=qianwen_config['api_key'],
-            model=qianwen_config['model']
-        )
+
+def emit_system_message(message):
+    """Emit a Codex-compatible non-blocking hook message."""
+    print(json.dumps({
+        "continue": True,
+        "systemMessage": message,
+    }, ensure_ascii=False))
 
 
 def load_config():
@@ -55,11 +51,11 @@ def main():
     try:
         # Read input from stdin
         input_data = json.loads(sys.stdin.read())
-        prompt = input_data.get('prompt', '')
+        prompt = input_data.get('prompt') or input_data.get('user_prompt', '')
 
         if not prompt:
             # No prompt, continue without modification
-            print(json.dumps({"result": "continue"}))
+            emit_continue()
             return
 
         # Load config
@@ -71,11 +67,11 @@ def main():
         # Check if prompt contains non-English text
         if not client.detect_non_english(prompt):
             # No non-English text detected, continue without modification
-            print(json.dumps({"result": "continue"}))
+            emit_continue()
             return
 
         # Translate to English
-        translated = client.translate(prompt, 'English')
+        translated, _ = client.translate(prompt, 'English')
 
         # Check if interactive mode is enabled
         interactive_input = config.get('interactive_input', True)
@@ -86,7 +82,7 @@ def main():
 
             if not confirmed:
                 # User cancelled, continue with original prompt without translation context
-                print(json.dumps({"result": "continue"}))
+                emit_continue()
                 return
 
             translated = edited_translation
@@ -101,13 +97,10 @@ The user's message above is in Chinese. Here is the English translation:
 
 Please respond based on the translated meaning."""
 
-        # Output as plain text - simpler and more reliable
-        print(context)
+        emit_additional_context(context)
 
     except Exception as e:
-        # On error, log to stderr and continue with original prompt
-        print(f"Translation hook error: {e}", file=sys.stderr)
-        print(json.dumps({"result": "continue"}))
+        emit_system_message(f"Translation hook error: {e}")
 
 
 if __name__ == '__main__':
