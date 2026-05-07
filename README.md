@@ -2,7 +2,7 @@
 
 [English](./README_en.md) | [加入讨论](https://github.com/D4ch1au/claude-code-translator/issues)
 
-> Fork 说明：本仓库 fork 自 [iChenwin/claude-code-translator](https://github.com/iChenwin/claude-code-translator)，原作者为 [iChenwin](https://github.com/iChenwin)。当前 fork 在原项目基础上保留原始署名并进行 provider 定制。
+> Fork 说明：本仓库 fork 自 [iChenwin/claude-code-translator](https://github.com/iChenwin/claude-code-translator)。
 
 **通过将提示词自动翻译为英文，节省 30%~50% 的 Token 消耗。**
 

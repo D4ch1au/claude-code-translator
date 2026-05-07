@@ -2,7 +2,7 @@
 
 [简体中文](./README.md)
 
-> Fork notice: This repository is forked from [iChenwin/claude-code-translator](https://github.com/iChenwin/claude-code-translator). The original author is [iChenwin](https://github.com/iChenwin). This fork preserves the original attribution and customizes translation providers on top of the original project.
+> Fork notice: This repository is forked from [iChenwin/claude-code-translator](https://github.com/iChenwin/claude-code-translator).
 
 **Save 30%~50% on token costs by automatically translating prompts to English.**
 
