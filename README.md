@@ -53,7 +53,7 @@
    {
      "provider": "minimax_coding_plan",
      "minimax_coding_plan": {
-       "base_url": "https://api.minimax.io/anthropic",
+       "base_url": "https://api.minimaxi.com/anthropic/v1/messages",
        "model": "MiniMax-M2.7",
        "api_key": "你的MiniMax Coding Plan API-Key",
        "temperature": 0.3,
@@ -77,7 +77,7 @@
 | `provider` | 翻译服务商。可填 `ttime`、`ttime_ai`、`ttime_google`、`ttime_deepl`、`ttime_bing`、`ttime_transmart`、`ttime_niutrans`、`minimax_coding_plan` | `ttime` |
 | `ttime.source` | `provider` 为 `ttime` 时使用的 TTime 云端翻译源 | `TTime` |
 | `ttime.token` | TTime 登录回调 token | 无 |
-| `minimax_coding_plan.base_url` | MiniMax Coding Plan API 基础地址 | `https://api.minimax.io/anthropic` |
+| `minimax_coding_plan.base_url` | MiniMax Coding Plan API 基础地址 | `https://api.minimaxi.com/anthropic/v1/messages` |
 | `minimax_coding_plan.model` | MiniMax Coding Plan 模型名 | `MiniMax-M2.7` |
 | `minimax_coding_plan.api_key` | MiniMax Coding Plan API key | 无 |
 | `minimax_coding_plan.max_tokens` | 单次翻译最大输出 token | `4096` |
@@ -100,7 +100,7 @@
 ## 依据
 
 - Stanford HAI 对语言模型隐性偏见机制的研究报道：`https://hai.stanford.edu/news/covert-racism-ai-how-language-models-are-reinforcing-outdated-stereotypes`。
-- MiniMax Coding Plan 配置参考 MiniMax 官方文档：`https://platform.minimax.io/docs/token-plan/other-tools`。
+- MiniMax Coding Plan 配置参考 MiniMax 官方文档：`https://platform.minimaxi.com/docs/api-reference/text-chat-anthropic`。
 - MiniMax Coding Plan 默认模型参考 `https://models.dev/api.json` 中的 `minimax-coding-plan` 记录。
 
 ## 卸载

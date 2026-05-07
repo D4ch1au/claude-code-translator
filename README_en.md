@@ -54,7 +54,7 @@ This plugin hooks into [Claude Code](https://docs.anthropic.com/en/docs/claude-c
    {
      "provider": "minimax_coding_plan",
      "minimax_coding_plan": {
-       "base_url": "https://api.minimax.io/anthropic",
+       "base_url": "https://api.minimaxi.com/anthropic/v1/messages",
        "model": "MiniMax-M2.7",
        "api_key": "your-minimax-coding-plan-api-key",
        "temperature": 0.3,
@@ -78,7 +78,7 @@ Restart Claude Code, and you're good to go.
 | `provider` | Translation provider. Supported values: `ttime`, `ttime_ai`, `ttime_google`, `ttime_deepl`, `ttime_bing`, `ttime_transmart`, `ttime_niutrans`, `minimax_coding_plan` | `ttime` |
 | `ttime.source` | TTime cloud source used when `provider` is `ttime` | `TTime` |
 | `ttime.token` | TTime login callback token | None |
-| `minimax_coding_plan.base_url` | MiniMax Coding Plan API base URL | `https://api.minimax.io/anthropic` |
+| `minimax_coding_plan.base_url` | MiniMax Coding Plan API base URL | `https://api.minimaxi.com/anthropic/v1/messages` |
 | `minimax_coding_plan.model` | MiniMax Coding Plan model name | `MiniMax-M2.7` |
 | `minimax_coding_plan.api_key` | MiniMax Coding Plan API key | None |
 | `minimax_coding_plan.max_tokens` | Maximum output tokens per translation | `4096` |
@@ -101,7 +101,7 @@ Restart Claude Code, and you're good to go.
 ## References
 
 - Stanford HAI reporting on covert bias mechanisms in language models: `https://hai.stanford.edu/news/covert-racism-ai-how-language-models-are-reinforcing-outdated-stereotypes`.
-- MiniMax Coding Plan configuration is based on MiniMax official docs: `https://platform.minimax.io/docs/token-plan/other-tools`.
+- MiniMax Coding Plan configuration is based on MiniMax official docs: `https://platform.minimaxi.com/docs/api-reference/text-chat-anthropic`.
 - The default MiniMax Coding Plan model is based on the `minimax-coding-plan` record in `https://models.dev/api.json`.
 
 ## Uninstallation

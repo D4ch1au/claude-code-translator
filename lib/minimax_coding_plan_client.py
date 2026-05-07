@@ -9,7 +9,7 @@ import requests
 class MiniMaxCodingPlanClient:
     """Client for MiniMax Coding Plan translation."""
 
-    DEFAULT_BASE_URL = "https://api.minimax.io/anthropic"
+    DEFAULT_BASE_URL = "https://api.minimaxi.com/anthropic/v1/messages"
     DEFAULT_MODEL = "MiniMax-M2.7"
     DEFAULT_ANTHROPIC_VERSION = "2023-06-01"
 

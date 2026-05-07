@@ -29,7 +29,7 @@
     "source": "NiuTransBuiltIn"
   },
   "minimax_coding_plan": {
-    "base_url": "https://api.minimax.io/anthropic",
+    "base_url": "https://api.minimaxi.com/anthropic/v1/messages",
     "model": "MiniMax-M2.7",
     "api_key": "your-minimax-api-key",
     "temperature": 0.3,
