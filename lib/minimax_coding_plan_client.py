@@ -67,7 +67,7 @@ class MiniMaxCodingPlanClient:
             r"[\u0c00-\u0c7f]",
             r"[\u0b80-\u0bff]",
         ]
-        return len(re.findall("|".join(patterns), clean_text)) > 2
+        return bool(re.search("|".join(patterns), clean_text))
 
     def translate(self, text: str, target_lang: str) -> Tuple[str, dict]:
         url = self._messages_url()
