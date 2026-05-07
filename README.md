@@ -1,6 +1,6 @@
 # Claude Code 翻译插件
 
-[English](./README_en.md) | [加入讨论](https://github.com/iChenwin/claude-code-translator/issues)
+[English](./README_en.md) | [加入讨论](https://github.com/D4ch1au/claude-code-translator/issues)
 
 > Fork 说明：本仓库 fork 自 [iChenwin/claude-code-translator](https://github.com/iChenwin/claude-code-translator)，原作者为 [iChenwin](https://github.com/iChenwin)。当前 fork 在原项目基础上保留原始署名并进行 provider 定制。
 
@@ -26,7 +26,7 @@
 
 1. **下载与安装依赖**
    ```bash
-   git clone https://github.com/iChenwin/claude-code-translator.git
+   git clone https://github.com/D4ch1au/claude-code-translator.git
    cd claude-code-translator
    pip install -r requirements.txt
    ```

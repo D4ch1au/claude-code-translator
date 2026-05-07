@@ -28,7 +28,7 @@ This plugin hooks into [Claude Code](https://docs.anthropic.com/en/docs/claude-c
 
 1. **Clone & Install Dependencies**
    ```bash
-   git clone https://github.com/iChenwin/claude-code-translator.git
+   git clone https://github.com/D4ch1au/claude-code-translator.git
    cd claude-code-translator
    pip install -r requirements.txt
    ```
